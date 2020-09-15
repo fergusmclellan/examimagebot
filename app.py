@@ -25,6 +25,7 @@ def create_image(incoming_msg):
     :return: A text or markdown based reply
     """
     image_filename = 'output.png'
+    img = Image.new('RGB', (220, 220), color = ('white'))
     drawing = ImageDraw.Draw(img)
     drawing.rectangle([(0,0), (200, 200)], fill=None, outline='black',width=2)
     img.save(image_filename)
