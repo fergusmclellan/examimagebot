@@ -35,7 +35,7 @@ def create_image(incoming_msg):
     image_filename = 'output.png'
     img = Image.new('RGB', (220, 220), color = ('white'))
     drawing = ImageDraw.Draw(img)
-    drawing.text((BORDER_PADDING_PX, text_start_height), incoming_msg.text, font=IMAGE_FONT, fill=('black'))
+    drawing.text((BORDER_PADDING_PX, 10), incoming_msg.text, font=IMAGE_FONT, fill=('black'))
     drawing.rectangle([(0,0), (200, 200)], fill=None, outline='black',width=2)
     img.save('/app/' + image_filename)
     return "image saved as: " + image_filename
