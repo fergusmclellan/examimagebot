@@ -1,5 +1,6 @@
 import os
 from webexteamsbot import TeamsBot
+from PIL import Image, ImageDraw, ImageFont
 
 # Retrieve required details from environment variables
 bot_email = os.getenv("TEAMS_BOT_EMAIL")
@@ -17,17 +18,21 @@ bot = TeamsBot(
 
 
 # A simple command that returns a basic string that will be sent as a reply
-def do_something(incoming_msg):
+def create_image(incoming_msg):
     """
-    Sample function to do some action.
+    Function to create an image based on .
     :param incoming_msg: The incoming message object from Teams
     :return: A text or markdown based reply
     """
-    return "i did what you said - {}".format(incoming_msg.text)
+    image_filename = 'output.png'
+    drawing = ImageDraw.Draw(img)
+    drawing.rectangle([(0,0), (200, 200)], fill=None, outline='black',width=2)
+    img.save(image_filename)
+    return "image saved as" + image_filename
 
 
 # Add new commands to the box.
-bot.add_command("/dosomething", "help for do something", do_something)
+bot.add_command("/createimage", "help for create image", create_image)
 
 
 if __name__ == "__main__":
