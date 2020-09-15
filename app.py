@@ -2,6 +2,14 @@ import os
 from webexteamsbot import TeamsBot
 from PIL import Image, ImageDraw, ImageFont
 
+FONT_HEIGHT_SIZE_PX = 15
+FONT_WIDTH_SIZE_PX = 9
+LINE_SPACING_PX = 2
+BORDER_PADDING_PX = 6
+MAX_WIDTH_PX = 950
+MAX_HEIGHT_PX = 600
+IMAGE_FONT = ImageFont.truetype('cour.ttf', FONT_HEIGHT_SIZE_PX)
+
 # Retrieve required details from environment variables
 bot_email = os.getenv("TEAMS_BOT_EMAIL")
 teams_token = os.getenv("TEAMS_BOT_TOKEN")
@@ -27,9 +35,10 @@ def create_image(incoming_msg):
     image_filename = 'output.png'
     img = Image.new('RGB', (220, 220), color = ('white'))
     drawing = ImageDraw.Draw(img)
+    drawing.text((BORDER_PADDING_PX, text_start_height), incoming_msg.text, font=IMAGE_FONT, fill=('black'))
     drawing.rectangle([(0,0), (200, 200)], fill=None, outline='black',width=2)
-    img.save(image_filename)
-    return "image saved as" + image_filename
+    img.save('/app/' + image_filename)
+    return "image saved as: " + image_filename
 
 
 # Add new commands to the box.
